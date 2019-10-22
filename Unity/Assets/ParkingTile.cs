@@ -10,21 +10,23 @@ using UnityEngine;
 // and refreshes its appearances based on the int-value.
 public class ParkingTile : MonoBehaviour {
     public Vector2Int position;
-    public UnityEngine.UI.Image image;
+    private MeshRenderer car;
+    private Material carMaterial;
 
     void Start() {
-        this.image = this.GetComponent<UnityEngine.UI.Image>();
+        // fetch car-mesh
+        this.car = this.transform.GetChild(0).GetComponent<MeshRenderer>();
+        // initialize position based on hierarchy index
         this.position = new Vector2Int(this.transform.GetSiblingIndex(), this.transform.parent.GetSiblingIndex());
+        // create a new carMaterial
+        carMaterial = new Material(car.material);
+        car.material = carMaterial;
     }
 
     void Update() {
-        image.color = Main.instance.carColors[Main.instance.parkingLot.area[position.x, position.y]];
-        // change sprite if parkingTile is empty
-        if (Main.instance.parkingLot.area[position.x, position.y] == 0) {
-            this.image.sprite = Main.instance.asphaltSprite;
-        } else {
-            this.image.sprite = null;
-        }
+        carMaterial.color = Main.instance.carColors[Main.instance.parkingLot.area[position.x, position.y]];
+        // disable car-mesh if parkingTile is empty
+        car.enabled = (Main.instance.parkingLot.area[position.x, position.y] != 0);
     }
 
     // if the editor is enabled, you can click on a ParkingTile to store a car's value in the same ParkingLot.area position
