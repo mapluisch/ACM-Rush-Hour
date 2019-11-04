@@ -17,11 +17,6 @@ public class Car {
         this.orientation = orientation;
         this.position = position;
     }
-
-    public Car Copy() {
-        Car copy = new Car(this.id, this.length, this.orientation, this.position);
-        return copy;
-    }
 }
 
 public enum Orientation { horizontal, vertical };

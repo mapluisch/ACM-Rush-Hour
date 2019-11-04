@@ -21,8 +21,7 @@ public class Main : MonoBehaviour {
     void FillCarColors() {
         // fills the carColors-List with random colors
 
-        // the first color is always used for blank spaces
-        // hence an asphalt-looking color
+        // the first color is never used; just used as index-offset
         carColors.Add(new Color(1f, 1f, 1f, 1f));
 
         // the second stays always the same - red
@@ -84,29 +83,18 @@ public class Main : MonoBehaviour {
 
     public void QueuePossibleMoves(Node n) {
         foreach (Car car in n.parkingLot.cars) {
-            if (n.parkingLot.CanCarMove(car, Direction.forward)) {
-                Node m = new Node(n, n.parkingLot, car.id, Direction.forward);
-                m.parkingLot.MoveCar(m.parkingLot.cars[car.id - 1], Direction.forward);
-                if (!visitedNodes.Contains(m.GetParkingLotString())) {
-                    solutionQueue.Enqueue(m);
-                    visitedNodes.Add(m.GetParkingLotString());
-                    if (m.IsParkingLotSolved()) {
-                        CreateSolutionPath(m);
-                        solutionQueue.Clear();
-                        return;
-                    }
-                }
-            }
-            if (n.parkingLot.CanCarMove(car, Direction.backward)) {
-                Node m = new Node(n, n.parkingLot, car.id, Direction.backward);
-                m.parkingLot.MoveCar(m.parkingLot.cars[car.id - 1], Direction.backward);
-                if (!visitedNodes.Contains(m.GetParkingLotString())) {
-                    solutionQueue.Enqueue(m);
-                    visitedNodes.Add(m.GetParkingLotString());
-                    if (m.IsParkingLotSolved()) {
-                        CreateSolutionPath(m);
-                        solutionQueue.Clear();
-                        return;
+            for (int direction = 0; direction <= 1; direction++) {
+                if (n.parkingLot.CanCarMove(car, (Direction)direction)) {
+                    Node m = new Node(n, n.parkingLot, car.id, (Direction)direction);
+                    m.parkingLot.MoveCar(m.parkingLot.cars[car.id - 1], (Direction)direction);
+                    if (!visitedNodes.Contains(m.GetParkingLotString())) {
+                        solutionQueue.Enqueue(m);
+                        visitedNodes.Add(m.GetParkingLotString());
+                        if (m.IsParkingLotSolved()) {
+                            CreateSolutionPath(m);
+                            solutionQueue.Clear();
+                            return;
+                        }
                     }
                 }
             }
