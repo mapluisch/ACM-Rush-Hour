@@ -90,7 +90,13 @@ public class GUIController : MonoBehaviour {
         solutionStepLabel.text = "Step " + solutionStep;
     }
 
-
+    public void ClearButton() {
+        isEditing = false;
+        solutionStep = 0;
+        solutionStepLabel.text = "Step 0";
+        StopAllCoroutines();
+        GenerateParkingLotWithInput();
+    }
     public void ToggleEditor() {
         isEditing = !isEditing;
     }

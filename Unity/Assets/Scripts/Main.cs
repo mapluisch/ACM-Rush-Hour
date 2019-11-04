@@ -8,6 +8,7 @@ public class Main : MonoBehaviour {
     public int numOfVehicles = 0; // redundant, could just use cars.Count
     public ParkingLot parkingLot = new ParkingLot();
     public List<Color> carColors = new List<Color>();
+    public UnityEngine.UI.Text solutionText;
 
     void Awake() {
         if (instance == null) instance = this;
@@ -70,11 +71,11 @@ public class Main : MonoBehaviour {
             CreateSolutionPath(endNode.parent);
         } else {
             // print amount of steps needed to solve the puzzle
-            print("Rush-Hour solved in " + solutionPath.Count + " steps.");
+            solutionText.text = ("Rush-Hour solved in " + solutionPath.Count + " steps.\n\n");
             // create ACM conform output
             for (int i = solutionPath.Count - 1; i >= 0; i--) {
                 // subtract 1 from ID to get ACM-conform Car 0 - Car 9 (internally referred to as 1-10)
-                print("Car " + (solutionPath[i].movedCarID - 1) + "  " + (solutionPath[i].movedDirection == Direction.forward ? "F" : "B"));
+                solutionText.text += ("Car " + (solutionPath[i].movedCarID - 1) + ": " + (solutionPath[i].movedDirection == Direction.forward ? "F" : "B") + "\n");
             }
             // add the initial starting node to the solution path as well (useful for solutionStepper)
             solutionPath.Add(endNode);
