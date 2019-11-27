@@ -6,6 +6,7 @@ using UnityEngine;
 public class GUIController : MonoBehaviour {
     public UnityEngine.UI.Text selectedCarLabel, parkingLotLabel;
     public UnityEngine.UI.InputField parkingLotInput;
+    public UnityEngine.UI.Image editorImage;
     private int carID = 0;
     private Car currentCar;
 
@@ -36,7 +37,6 @@ public class GUIController : MonoBehaviour {
     }
 
     void Update() {
-        selectedCarLabel.text = "Car " + carID;
         ShowParkingLotAsString();
 
         // editor value parsing
@@ -47,6 +47,9 @@ public class GUIController : MonoBehaviour {
                 if (Input.GetKeyDown(i.ToString()))
                     editorValue = i;
             }
+            // use 0 as 10th car and ß as 0th car (to remove a car)
+            if (Input.GetKeyDown(KeyCode.Alpha0)) editorValue = 10;
+            if (Input.inputString == "ß") editorValue = 0;
         }
     }
 
@@ -54,9 +57,10 @@ public class GUIController : MonoBehaviour {
         parkingLotLabel.text = "";
         for (int i = 0; i < Main.instance.parkingLot.area.GetLength(0); i++) {
             for (int j = 0; j < Main.instance.parkingLot.area.GetLength(1); j++) {
-                parkingLotLabel.text += Main.instance.parkingLot.area[j, i] + ", ";
+                parkingLotLabel.text += "<color=#" + ColorUtility.ToHtmlStringRGB(Main.instance.carColors[Main.instance.parkingLot.area[j, i]]) + ">" + Main.instance.parkingLot.area[j, i] + "</color>";
+                if (j < Main.instance.parkingLot.area.GetLength(1) - 1) parkingLotLabel.text += ", ";
             }
-            parkingLotLabel.text += "\n";
+            if (i < Main.instance.parkingLot.area.GetLength(0) - 1) parkingLotLabel.text += "\n";
         }
     }
 
@@ -81,7 +85,7 @@ public class GUIController : MonoBehaviour {
 
     public void PreviousSolutionStep() {
         solutionStep--;
-        if (solutionStep <= 0) solutionStep = Main.instance.solutionPath.Count - 1;
+        if (solutionStep < 0) solutionStep = Main.instance.solutionPath.Count - 1;
 
         Node solution = Main.instance.solutionPath[Main.instance.solutionPath.Count - 1 - solutionStep];
 
@@ -91,37 +95,51 @@ public class GUIController : MonoBehaviour {
     }
 
     public void ClearButton() {
-        isEditing = false;
+        if (isEditing) ToggleEditor();
+        if (autoPlaying) AutoPlaySolutionHelper();
         solutionStep = 0;
         solutionStepLabel.text = "Step 0";
         StopAllCoroutines();
-        GenerateParkingLotWithInput();
+        Main.instance.GenerateParkingLot("");
     }
     public void ToggleEditor() {
         isEditing = !isEditing;
+        if (isEditing) {
+            editorImage.color = Color.white;
+        } else {
+            editorImage.color = new Color(0.196f, 0.196f, 0.196f);
+        }
     }
 
     public UnityEngine.UI.Slider playbackSpeedSlider;
     public UnityEngine.UI.Text playbackSpeedLabel;
+    public UnityEngine.UI.Image autoPlayButtonImage;
+    public Sprite autoPlayOn, autoPlayOff;
     float speed = 0.5f; // show next step every <speed> seconds (basically 1 second / 2 steps)
+    bool autoPlaying = false;
     public void AutoPlaySolutionHelper() {
-        StartCoroutine(AutoPlaySolution(speed));
+        if (!autoPlaying) {
+            autoPlayButtonImage.sprite = autoPlayOn;
+            StartCoroutine(AutoPlaySolution());
+        } else {
+            autoPlayButtonImage.sprite = autoPlayOff;
+            autoPlaying = false;
+            StopAllCoroutines();
+        }
     }
 
     public void ChangeSpeed() {
         speed = (1 / playbackSpeedSlider.value);
         playbackSpeedLabel.text = playbackSpeedSlider.value + " steps per second";
-        StopAllCoroutines();
-        AutoPlaySolutionHelper();
     }
 
-    IEnumerator AutoPlaySolution(float s) {
+    IEnumerator AutoPlaySolution() {
+        autoPlaying = true;
         while (true) {
             NextSolutionStep();
-            yield return new WaitForSeconds(s);
+            yield return new WaitForSeconds(speed);
         }
     }
-
 
     public void LoadACMInput() {
         Main.instance.GenerateParkingLot("8\n" +

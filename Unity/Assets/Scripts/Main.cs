@@ -13,29 +13,10 @@ public class Main : MonoBehaviour {
     void Awake() {
         if (instance == null) instance = this;
         else Destroy(this);
-
-        FillCarColors();
     }
 
 
-    void FillCarColors() {
-        // fills the carColors-List with random colors
 
-        // the first color is never used; just used as index-offset
-        carColors.Add(new Color(1f, 1f, 1f, 1f));
-
-        // the second stays always the same - red
-        // since it's always representing the escaping car
-        carColors.Add(Color.red);
-        // a maxmimum of 10 colors can be hardcoded here
-        // based on ACM's description
-        for (int i = 0; i < 9; i++) {
-            carColors.Add(new Color(UnityEngine.Random.Range(0f, 1f),
-                                    UnityEngine.Random.Range(0f, 1f),
-                                    UnityEngine.Random.Range(0f, 1f),
-                                    1f));
-        }
-    }
     // solve the given rush hour puzzle using the breadth-first search
     // use a FIFO queue of type node to store all possible solutions / moves
     // once a solution is found, return it (since it's guaranteed to be optimal)
@@ -50,14 +31,14 @@ public class Main : MonoBehaviour {
         solutionPath.Clear();
 
         CreateInitialNode();
+
         while (solutionQueue.Count > 0) {
             QueuePossibleMoves(solutionQueue.Dequeue());
         }
         if (solutionPath.Count == 0) {
-            print("No Solution possible.");
+            solutionText.text = "Rush-Hour\nNo Solution possible.";
         }
     }
-
 
     public void CreateInitialNode() {
         Node n = new Node(null, parkingLot, 0, 0);
@@ -74,7 +55,7 @@ public class Main : MonoBehaviour {
             // create ACM conform output
             for (int i = solutionPath.Count - 1; i >= 0; i--) {
                 // subtract 1 from ID to get ACM-conform Car 0 - Car 9 (internally referred to as 1-10)
-                solutionText.text += ("Car " + (solutionPath[i].movedCarID - 1) + ": " + (solutionPath[i].movedDirection == Direction.forward ? "F" : "B") + "\n");
+                solutionText.text += ("<color=#" + ColorUtility.ToHtmlStringRGB(carColors[solutionPath[i].movedCarID]) + ">" + "Car " + (solutionPath[i].movedCarID) + ": " + (solutionPath[i].movedDirection == Direction.forward ? "F" : "B") + "</color>\n");
             }
             // add the initial starting node to the solution path as well (useful for solutionStepper)
             solutionPath.Add(endNode);

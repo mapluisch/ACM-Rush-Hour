@@ -24,9 +24,16 @@ public class ParkingTile : MonoBehaviour {
     }
 
     void Update() {
-        carMaterial.color = Main.instance.carColors[Main.instance.parkingLot.area[position.x, position.y]];
-        // disable car-mesh if parkingTile is empty
-        car.enabled = (Main.instance.parkingLot.area[position.x, position.y] != 0);
+        if (!editMouseHover) {
+            carMaterial.color = Main.instance.carColors[Main.instance.parkingLot.area[position.x, position.y]];
+            // disable car-mesh if parkingTile is empty
+            car.enabled = (Main.instance.parkingLot.area[position.x, position.y] != 0);
+        } else {
+            Color hoverColor = Main.instance.carColors[GUIController.editorValue];
+            hoverColor.a = 0.75f;
+            carMaterial.color = hoverColor;
+            car.enabled = true;
+        }
     }
 
     // if the editor is enabled, you can click on a ParkingTile to store a car's value in the same ParkingLot.area position
@@ -34,6 +41,19 @@ public class ParkingTile : MonoBehaviour {
         if (GUIController.isEditing) {
             Main.instance.parkingLot.area[position.x, position.y] = GUIController.editorValue;
             Main.instance.parkingLot.CreateCarsBasedOnArea();
+            editMouseHover = false;
+        }
+    }
+    private bool editMouseHover = false;
+    public void OnPointerEnter() {
+        if (GUIController.isEditing) {
+            editMouseHover = true;
+        }
+    }
+
+    public void OnPointerExit() {
+        if (GUIController.isEditing) {
+            editMouseHover = false;
         }
     }
 }
