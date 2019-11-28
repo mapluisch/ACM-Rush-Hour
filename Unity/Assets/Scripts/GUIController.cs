@@ -53,12 +53,26 @@ public class GUIController : MonoBehaviour {
         }
     }
 
+    public void SwitchParkingLotLabelFormat() {
+        labelFormatInt = !labelFormatInt;
+    }
+
+    private bool labelFormatInt = true;
     void ShowParkingLotAsString() {
         parkingLotLabel.text = "";
         for (int i = 0; i < Main.instance.parkingLot.area.GetLength(0); i++) {
             for (int j = 0; j < Main.instance.parkingLot.area.GetLength(1); j++) {
-                parkingLotLabel.text += "<color=#" + ColorUtility.ToHtmlStringRGB(Main.instance.carColors[Main.instance.parkingLot.area[j, i]]) + ">" + Main.instance.parkingLot.area[j, i] + "</color>";
-                if (j < Main.instance.parkingLot.area.GetLength(1) - 1) parkingLotLabel.text += ", ";
+                if (labelFormatInt) {
+                    parkingLotLabel.text += "<color=#" + ColorUtility.ToHtmlStringRGB(Main.instance.carColors[Main.instance.parkingLot.area[j, i]]) + ">" + Main.instance.parkingLot.area[j, i] + "</color>";
+                    if (j < Main.instance.parkingLot.area.GetLength(1) - 1) parkingLotLabel.text += ", ";
+                } else {
+                    if (Main.instance.parkingLot.area[j, i] == 0) {
+                        parkingLotLabel.text += "<color=#" + ColorUtility.ToHtmlStringRGB(Main.instance.carColors[Main.instance.parkingLot.area[j, i]]) + ">□</color>";
+                    } else {
+                        parkingLotLabel.text += "<color=#" + ColorUtility.ToHtmlStringRGB(Main.instance.carColors[Main.instance.parkingLot.area[j, i]]) + ">■</color>";
+                    }
+                    if (j < Main.instance.parkingLot.area.GetLength(1) - 1) parkingLotLabel.text += " ";
+                }
             }
             if (i < Main.instance.parkingLot.area.GetLength(0) - 1) parkingLotLabel.text += "\n";
         }
