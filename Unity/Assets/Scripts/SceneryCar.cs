@@ -8,7 +8,7 @@ public class SceneryCar : MonoBehaviour {
     int movementFactor;
     public float speed = 0.25f;
 
-    void OnEnable() {
+    void Start() {
         // get a random orientation & direction
         this.orientation = (Random.Range(0f, 1f) >= 0.5f) ? Orientation.horizontal : Orientation.vertical;
         this.direction = (Random.Range(0f, 1f) >= 0.5f) ? Direction.backward : Direction.forward;

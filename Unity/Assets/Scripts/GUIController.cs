@@ -4,16 +4,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GUIController : MonoBehaviour {
-    public UnityEngine.UI.Text selectedCarLabel, parkingLotLabel;
+    public UnityEngine.UI.Text parkingLotLabel;
     public UnityEngine.UI.InputField parkingLotInput;
     public UnityEngine.UI.Image editorImage;
     private int carID = 0;
     private Car currentCar;
+    public SceneryCarSpawner sceneryCarSpawner;
 
     // Editor related stuff
     public static bool isEditing = false;
     public static int editorValue = 0;
-
+    private bool showSceneryCars = true;
     public void SelectNextCar() {
         carID++;
         if (carID >= Main.instance.parkingLot.cars.Count) carID = 0;
@@ -50,6 +51,12 @@ public class GUIController : MonoBehaviour {
             // use 0 as 10th car and ß as 0th car (to remove a car)
             if (Input.GetKeyDown(KeyCode.Alpha0)) editorValue = 10;
             if (Input.inputString == "ß") editorValue = 0;
+        }
+
+        // toggle scenery cars per space-bar press
+        if (Input.GetKeyDown(KeyCode.P)) {
+            showSceneryCars = !showSceneryCars;
+            sceneryCarSpawner.gameObject.SetActive(showSceneryCars);
         }
     }
 

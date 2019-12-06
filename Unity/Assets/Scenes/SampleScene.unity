@@ -3350,8 +3350,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numOfVehicles: 0
-  parkingLot:
-    cars: []
   carColors:
   - {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 0}
   - {r: 1, g: 0.042452812, b: 0.042452812, a: 1}
@@ -3366,7 +3364,6 @@ MonoBehaviour:
   - {r: 0.15156639, g: 0.20706254, b: 0.24528301, a: 1}
   solutionText: {fileID: 2073489601}
   visitedNodes: []
-  solutionPath: []
 --- !u!4 &624730074
 Transform:
   m_ObjectHideFlags: 0
@@ -8764,10 +8761,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523d989932a244fca826f8f05490d6c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedCarLabel: {fileID: 0}
   parkingLotLabel: {fileID: 1243302666}
   parkingLotInput: {fileID: 873448585}
   editorImage: {fileID: 1936727806}
+  sceneryCarSpawner: {fileID: 1836210296}
   solutionStepLabel: {fileID: 43028791}
   playbackSpeedSlider: {fileID: 1009247265}
   playbackSpeedLabel: {fileID: 1678710318}
