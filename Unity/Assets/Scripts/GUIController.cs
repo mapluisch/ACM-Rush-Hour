@@ -58,6 +58,10 @@ public class GUIController : MonoBehaviour {
             showSceneryCars = !showSceneryCars;
             sceneryCarSpawner.gameObject.SetActive(showSceneryCars);
         }
+
+        // quick access for loading medium & hard level during presentation
+        if (Input.GetKeyDown(KeyCode.M)) LoadMediumLevel();
+        if (Input.GetKeyDown(KeyCode.H)) LoadHardLevel();
     }
 
     public void SwitchParkingLotLabelFormat() {
@@ -172,5 +176,30 @@ public class GUIController : MonoBehaviour {
                                          "2 V 4 0\n" +
                                          "2 H 4 4\n" +
                                          "3 H 5 2\n");
+    }
+
+    public void LoadMediumLevel() {
+        Main.instance.GenerateParkingLot("8\n" +
+                                         "2 H 2 0\n" +
+                                         "2 V 0 0\n" +
+                                         "2 H 0 1\n" +
+                                         "3 V 1 2\n" +
+                                         "3 H 3 3\n" +
+                                         "3 V 0 5\n" +
+                                         "2 V 4 4\n" +
+                                         "3 H 5 0\n");
+    }
+
+    public void LoadHardLevel() {
+        Main.instance.GenerateParkingLot("9\n" +
+                                         "2 H 2 3\n" +
+                                         "3 V 0 2\n" +
+                                         "2 H 0 3\n" +
+                                         "3 V 0 5\n" +
+                                         "2 H 3 4\n" +
+                                         "3 V 3 3\n" +
+                                         "2 H 5 4\n" +
+                                         "2 H 4 1\n" +
+                                         "2 V 4 0\n");
     }
 }
