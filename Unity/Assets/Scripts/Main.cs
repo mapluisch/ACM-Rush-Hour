@@ -22,8 +22,10 @@ public class Main : MonoBehaviour {
     // visited nodes contains each visitied parking lot configuration stored as a string
     // (by concatenating each (x,y) cell)
     public List<string> visitedNodes = new List<string>();
-
+    public float solveStartTime;
     public void Solve() {
+        solveStartTime = Time.realtimeSinceStartup;
+
         // reset old remains (if any)
         solutionQueue.Clear();
         visitedNodes.Clear();
@@ -51,7 +53,8 @@ public class Main : MonoBehaviour {
             CreateSolutionPath(endNode.parent);
         } else {
             // print amount of steps needed to solve the puzzle
-            solutionText.text = ("Rush Hour solved in " + solutionPath.Count + " steps.\n\n");
+            solutionText.text = ("Rush Hour\nsolved in " + solutionPath.Count + " steps.\n"
+            + "<size=30>[" + (Time.realtimeSinceStartup - solveStartTime).ToString("f4") + "s | " + visitedNodes.Count + " Nodes]</size>\n\n");
             // create ACM conform output
             for (int i = solutionPath.Count - 1; i >= 0; i--) {
                 // subtract 1 from ID to get ACM-conform Car 0 - Car 9 (internally referred to as 1-10)

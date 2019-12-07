@@ -23,10 +23,8 @@ public class Node {
 
     public string GetParkingLotString() {
         string result = "";
-        for (int i = 0; i < this.parkingLot.area.GetLength(0); i++) {
-            for (int j = 0; j < this.parkingLot.area.GetLength(1); j++) {
-                result += this.parkingLot.area[j, i];
-            }
+        foreach (Car car in parkingLot.cars) {
+            result += car.position.x + "" + car.position.y;
         }
         return result;
     }
