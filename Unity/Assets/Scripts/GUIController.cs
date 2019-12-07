@@ -60,8 +60,8 @@ public class GUIController : MonoBehaviour {
         }
 
         // quick access for loading medium & hard level during presentation
-        if (Input.GetKeyDown(KeyCode.M)) LoadMediumLevel();
-        if (Input.GetKeyDown(KeyCode.H)) LoadHardLevel();
+        if (Input.GetKeyDown(KeyCode.N)) LoadMediumLevel();
+        if (Input.GetKeyDown(KeyCode.M)) LoadHardLevel();
     }
 
     public void SwitchParkingLotLabelFormat() {
