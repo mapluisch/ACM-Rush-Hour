@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using UnityEngine;
 
 // A Node is one encapsulated possibility used for the breadth-first-based Solve-algorithm
@@ -21,11 +22,13 @@ public class Node {
         this.movedDirection = movedDirection;
     }
 
-    public string GetParkingLotString() {
-        string result = "";
+    public UInt64 GetParkingLotString() {
+        StringBuilder sb = new StringBuilder();
         foreach (Car car in parkingLot.cars) {
-            result += car.position.x + "" + car.position.y;
+            sb.Append(car.position.x);
+            sb.Append(car.position.y);
         }
+        UInt64 result = UInt64.Parse(sb.ToString());
         return result;
     }
 

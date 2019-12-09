@@ -21,7 +21,7 @@ public class Main : MonoBehaviour {
     public Queue<Node> solutionQueue = new Queue<Node>();
     // visited nodes contains each visitied parking lot configuration stored as a string
     // (by concatenating each (x,y) cell)
-    public List<string> visitedNodes = new List<string>();
+    public List<UInt64> visitedNodes = new List<UInt64>();
     public float solveStartTime;
     public void Solve() {
         solveStartTime = Time.realtimeSinceStartup;
