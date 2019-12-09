@@ -3359,11 +3359,14 @@ MonoBehaviour:
   - {r: 1, g: 0.7127394, b: 0, a: 1}
   - {r: 0.13548422, g: 0, b: 1, a: 1}
   - {r: 0.20220721, g: 0.55664134, b: 0.6037736, a: 1}
-  - {r: 0.6033369, g: 0.6037736, b: 0.3446066, a: 1}
-  - {r: 0.509434, g: 0.509434, b: 0.509434, a: 1}
-  - {r: 0.15156639, g: 0.20706254, b: 0.24528301, a: 1}
+  - {r: 0.1235398, g: 0.49056602, b: 0.09487361, a: 1}
+  - {r: 0.6714534, g: 0.8773585, b: 0.10346207, a: 1}
+  - {r: 0.6226415, g: 0.39663264, b: 0.16153437, a: 1}
+  - {r: 0.047659315, g: 0.366556, b: 0.5943396, a: 1}
+  - {r: 0.21124065, g: 0.9528302, b: 0.6109893, a: 1}
+  - {r: 0.9529412, g: 0.31373513, b: 0.2117647, a: 1}
   solutionText: {fileID: 2073489601}
-  visitedNodes: []
+  visitedNodes: 
   solveStartTime: 0
 --- !u!4 &624730074
 Transform:
@@ -6100,6 +6103,7 @@ GameObject:
   - component: {fileID: 1243302665}
   - component: {fileID: 1243302667}
   - component: {fileID: 1243302666}
+  - component: {fileID: 1243302668}
   m_Layer: 5
   m_Name: ParkingLotLabel
   m_TagString: Untagged
@@ -6176,6 +6180,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1243302664}
   m_CullTransparentMesh: 0
+--- !u!114 &1243302668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243302664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.25882354}
+  m_EffectDistance: {x: 0.5, y: 0.5}
+  m_UseGraphicAlpha: 1
 --- !u!1001 &1243763580
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9800,8 +9819,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1837416426}
   m_HandleRect: {fileID: 1837416425}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.9885427
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -10154,6 +10173,7 @@ GameObject:
   - component: {fileID: 2073489602}
   - component: {fileID: 2073489601}
   - component: {fileID: 2073489603}
+  - component: {fileID: 2073489604}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -10244,6 +10264,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &2073489604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2073489599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.32941177}
+  m_EffectDistance: {x: 0.5, y: 0.5}
+  m_UseGraphicAlpha: 1
 --- !u!1 &2138890877
 GameObject:
   m_ObjectHideFlags: 0

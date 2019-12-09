@@ -62,6 +62,7 @@ public class GUIController : MonoBehaviour {
         // quick access for loading medium & hard level during presentation
         if (Input.GetKeyDown(KeyCode.N)) LoadMediumLevel();
         if (Input.GetKeyDown(KeyCode.M)) LoadHardLevel();
+        if (Input.GetKeyDown(KeyCode.K)) LoadExtremeLevel();
     }
 
     public void SwitchParkingLotLabelFormat() {
@@ -201,5 +202,22 @@ public class GUIController : MonoBehaviour {
                                          "2 H 5 4\n" +
                                          "2 H 4 1\n" +
                                          "2 V 4 0\n");
+    }
+
+    public void LoadExtremeLevel() {
+        Main.instance.GenerateParkingLot("12\n" +
+                                         "2 H 2 2\n" +
+                                         "3 H 0 0\n" +
+                                         "2 H 1 1\n" +
+                                         "2 V 1 0\n" +
+                                         "2 V 0 3\n" +
+                                         "3 V 0 4\n" +
+                                         "3 V 0 5\n" +
+                                         "2 H 3 0\n" +
+                                         "2 V 3 2\n" +
+                                         "2 V 4 1\n" +
+                                         "2 H 5 2\n" +
+                                         "2 H 5 4\n" +
+                                         "2 H 4 4\n");
     }
 }
