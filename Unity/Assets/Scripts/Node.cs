@@ -22,14 +22,13 @@ public class Node {
         this.movedDirection = movedDirection;
     }
 
-    public UInt64 GetNodeValue() {
+    public int GetNodeValue() {
         StringBuilder sb = new StringBuilder();
         foreach (Car car in parkingLot.cars) {
             sb.Append(car.position.x);
             sb.Append(car.position.y);
         }
-        UInt64 result = UInt64.Parse(sb.ToString());
-        return result;
+        return sb.ToString().GetHashCode();
     }
 
     public bool IsParkingLotSolved() {
