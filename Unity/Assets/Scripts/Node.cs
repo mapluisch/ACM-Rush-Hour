@@ -22,7 +22,7 @@ public class Node {
         this.movedDirection = movedDirection;
     }
 
-    public UInt64 GetParkingLotString() {
+    public UInt64 GetNodeValue() {
         StringBuilder sb = new StringBuilder();
         foreach (Car car in parkingLot.cars) {
             sb.Append(car.position.x);

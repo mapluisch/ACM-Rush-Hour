@@ -71,9 +71,9 @@ public class Main : MonoBehaviour {
                 if (n.parkingLot.CanCarMove(car, (Direction)direction)) {
                     Node m = new Node(n, n.parkingLot, car.id, (Direction)direction);
                     m.parkingLot.MoveCar(m.parkingLot.cars[car.id - 1], (Direction)direction);
-                    if (!visitedNodes.Contains(m.GetParkingLotString())) {
+                    if (!visitedNodes.Contains(m.GetNodeValue())) {
                         solutionQueue.Enqueue(m);
-                        visitedNodes.Add(m.GetParkingLotString());
+                        visitedNodes.Add(m.GetNodeValue());
                         if (m.IsParkingLotSolved()) {
                             CreateSolutionPath(m);
                             solutionQueue.Clear();
