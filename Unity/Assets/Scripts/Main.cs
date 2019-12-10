@@ -21,7 +21,7 @@ public class Main : MonoBehaviour {
     public Queue<Node> solutionQueue = new Queue<Node>();
     // visited nodes contains each visitied parking lot configuration stored as a string
     // (by concatenating each (x,y) cell)
-    public List<int> visitedNodes = new List<int>();
+    public HashSet<int> visitedNodes = new HashSet<int>();
     public float solveStartTime;
     public void Solve() {
         solveStartTime = Time.realtimeSinceStartup;
@@ -38,7 +38,7 @@ public class Main : MonoBehaviour {
         }
 
         if (solutionPath.Count == 0) {
-            solutionText.text = "Rush-Hour\nNo Solution possible.";
+            solutionText.text = "Rush Hour\nNo Solution possible.";
         }
     }
 
@@ -69,9 +69,9 @@ public class Main : MonoBehaviour {
         foreach (Car car in n.parkingLot.cars) {
             for (int direction = 0; direction <= 1; direction++) {
                 if (n.parkingLot.CanCarMove(car, (Direction)direction)) {
-                    Node m = new Node(n, n.parkingLot, car.id, (Direction)direction);
-                    m.parkingLot.MoveCar(m.parkingLot.cars[car.id - 1], (Direction)direction);
-                    if (!visitedNodes.Contains(m.GetNodeValue())) {
+                    if (!visitedNodes.Contains(n.GetNewNodeValue(car.id, (Direction)direction))) {
+                        Node m = new Node(n, n.parkingLot, car.id, (Direction)direction);
+                        m.parkingLot.MoveCar(m.parkingLot.cars[car.id - 1], (Direction)direction);
                         solutionQueue.Enqueue(m);
                         visitedNodes.Add(m.GetNodeValue());
                         if (m.IsParkingLotSolved()) {

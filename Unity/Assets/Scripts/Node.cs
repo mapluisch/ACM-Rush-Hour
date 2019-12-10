@@ -31,6 +31,14 @@ public class Node {
         return sb.ToString().GetHashCode();
     }
 
+    public int GetNewNodeValue(int carID, Direction direction) {
+        parkingLot.MoveCar(parkingLot.cars[carID - 1], direction);
+        int newNodeVal = GetNodeValue();
+        Direction reverseDirection = (direction == Direction.forward) ? Direction.backward : Direction.forward;
+        parkingLot.MoveCar(parkingLot.cars[carID - 1], reverseDirection);
+        return newNodeVal;
+    }
+
     public bool IsParkingLotSolved() {
         return (parkingLot.cars[0].position.x + parkingLot.cars[0].length == parkingLot.area.GetLength(0));
     }

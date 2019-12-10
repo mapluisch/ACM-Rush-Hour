@@ -17,7 +17,6 @@ public class SceneryCarSpawner : MonoBehaviour {
     void SpawnCar() {
         GameObject newCar = Instantiate(sceneryCar);
         newCar.transform.SetParent(this.transform);
-        newCar.GetComponent<SceneryCar>().speed = carSpeed;
         newCar.SetActive(true);
     }
 
