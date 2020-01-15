@@ -38,7 +38,7 @@ public class Main : MonoBehaviour {
         }
 
         if (solutionPath.Count == 0) {
-            solutionText.text = "Rush Hour\nNo Solution possible.";
+            solutionText.text = "Rush Hour\nhas no solution.";
         }
     }
 

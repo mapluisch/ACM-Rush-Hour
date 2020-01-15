@@ -22,13 +22,13 @@ public class Node {
         this.movedDirection = movedDirection;
     }
 
+
     public int GetNodeValue() {
-        StringBuilder sb = new StringBuilder();
+        int hash = 17;
         foreach (Car car in parkingLot.cars) {
-            sb.Append(car.position.x);
-            sb.Append(car.position.y);
+            hash *= 23 + car.position.GetHashCode();
         }
-        return sb.ToString().GetHashCode();
+        return hash;
     }
 
     public int GetNewNodeValue(int carID, Direction direction) {
