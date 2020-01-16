@@ -24,9 +24,10 @@ public class Node {
 
 
     public int GetNodeValue() {
-        int hash = 17;
+        int hash = 7;
         foreach (Car car in parkingLot.cars) {
-            hash *= 23 + car.position.GetHashCode();
+            hash *= 17;
+            hash += car.position.GetHashCode();
         }
         return hash;
     }
