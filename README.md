@@ -26,4 +26,4 @@ The actual solve-algorithm uses breadth-first search (to ensure an optimal solut
 
 To store & compare different search-nodes, I use a HashSet\<int\> (for fast O(1) "contains"-operations).
 
-The [hardest possible Rush Hour puzzle](http://di.ulb.ac.be/algo/secollet/papers/crs06.pdf) is solved within 0.5 seconds.
+The [hardest possible Rush Hour puzzle](http://di.ulb.ac.be/algo/secollet/papers/crs06.pdf) is solved within \~0.05 seconds.
