@@ -3,6 +3,8 @@ Rush Hour-Puzzle solver and editor written in C# / Unity. ACM Proseminar, Univer
 
 Based on the ACM programming contest problem "Rush Hour": [PDF](Documentation/task.pdf)
 
+My resulting paper, describing the details of my implementation: [PDF](Documentation/paper.pdf)
+
 ![UI Screenshot](Documentation/ui_screenshot.png?raw=true "UI Screenshot")
 
 ## Input
